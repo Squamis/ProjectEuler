@@ -15,15 +15,32 @@
 
 int M_of_3_or_5(int max);
 
+int Arithmetic_Series_M_of_3_or_5(int max);
+
+int Arithmetic_Series_helper(int n, int max);
+
+
+
+
+int Arithmetic_Series_M_of_3_or_5(int max){
+	return Arithmetic_Series_helper(3, max) + Arithmetic_Series_helper(5, max) - Arithmetic_Series_helper(15, max);
+
+}
+
+
+int Arithmetic_Series_helper(int n, int max){
+	/* so this is using the formula 1+2+3+⋯+k = k(k+1)/2 but instead of counting my 1 we are either counting by 3 or 5*/
+	int p = (max - 1) / n; //
+	return n * p * (p + 1) / 2;
+
+}
+
 int M_of_3_or_5(int max){
 	/*If we list all the natural numbers below that are multiples of or , we get and . The sum of these multiples is . */
 
 	int count = 0;
-	for (int i = 0 ; i < max ; i++){
-		if ( i % 3 == 0){
-			count += i;
-		}
-		else if ( i % 5 == 0){
+	for (register int i = 0 ; i < max ; i++){ //using register cut the run time almost in half
+		if ( i % 3 == 0 || i % 5 == 0){
 			count += i;
 		}
 	}
@@ -37,7 +54,8 @@ int main(){
 	start = clock();
 
 	for (int i = 0 ; i < 100000 ; i++){
-		M_of_3_or_5(1000);
+		//M_of_3_or_5(1000);
+		Arithmetic_Series_M_of_3_or_5(1000);
 	} 
 
 
